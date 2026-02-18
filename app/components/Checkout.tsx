@@ -30,36 +30,36 @@ export default function Checkout({ isUserEligible = true }: CheckoutProps) {
         <p data-test-id="payment-method">Método: DEUNA</p>
       </div>
 
-      {/* NIVEL FÁCIL: data-test-id y texto directo — fácil de detectar si cambia */}
+      {/* NIVEL FÁCIL: data-test-id renombrado + texto del botón cambiado */}
       {!confirmed ? (
         <button
-          data-test-id="checkout-btn"
+          data-test-id="checkout-button"
           onClick={handlePay}
           disabled={loading}
         >
-          {loading ? 'Procesando...' : 'Pagar'}
+          {loading ? 'Procesando...' : 'Confirmar pago'}
         </button>
       ) : (
         <div data-test-id="confirmation-message">
           <p>Pago confirmado exitosamente</p>
-          <button data-test-id="cancel-btn" onClick={handleCancel}>
+          <button data-test-id="cancel-button" onClick={handleCancel}>
             Cancelar
           </button>
         </div>
       )}
 
-      {/* NIVEL MEDIO: el evento onClick está en el div padre, no en el button */}
-      <div
-        data-test-id="alternative-pay-wrapper"
-        onClick={() => alert('Pago alternativo iniciado')}
-      >
-        <button data-test-id="alternative-pay-btn">
+      {/* NIVEL MEDIO: onClick movido del div wrapper al button */}
+      <div data-test-id="alternative-pay-wrapper">
+        <button
+          data-test-id="alternative-pay-btn"
+          onClick={() => alert('Pago alternativo iniciado')}
+        >
           Pagar con otro método
         </button>
       </div>
 
-      {/* NIVEL DIFÍCIL: elemento condicionado por prop — puede no estar en el DOM */}
-      {isUserEligible && (
+      {/* NIVEL DIFÍCIL: ahora depende de prop Y de que no esté confirmado */}
+      {isUserEligible && !confirmed && (
         <button
           data-test-id="deuna-express-btn"
           onClick={handlePay}
