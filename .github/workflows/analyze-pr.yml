@@ -52,8 +52,10 @@ jobs:
             curl -s http://localhost:11434 && break || sleep 3
           done
 
-      - name: Pull llama3.2
-        run: ollama pull llama3.2
+      - name: Pull models
+        run: |
+          ollama pull llama3.2
+          ollama pull nomic-embed-text
 
       - name: Run PR analysis
         working-directory: poc-analyzer
