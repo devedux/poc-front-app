@@ -22,8 +22,8 @@ export default function Checkout({ isUserEligible = true }: CheckoutProps) {
   }
 
   return (
-    <div data-test-id="checkout-container">
-      <h1 data-test-id="checkout-title">Resumen de tu pedido</h1>
+    <div data-test-id="modular-checkout">
+      <h1 data-test-id="checkout-title">Order de tu pedido</h1>
 
       <div data-test-id="order-summary">
         <p data-test-id="order-amount">Total: $100.00 USD</p>
@@ -33,7 +33,6 @@ export default function Checkout({ isUserEligible = true }: CheckoutProps) {
       {/* NIVEL FÁCIL: data-test-id renombrado + texto del botón cambiado */}
       {!confirmed ? (
         <button
-          data-test-id="checkout-button"
           onClick={handlePay}
           disabled={loading}
         >
