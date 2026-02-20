@@ -33,7 +33,7 @@ export default function Checkout({ isUserEligible = true }: CheckoutProps) {
       {/* NIVEL FÁCIL: data-test-id y texto directo — fácil de detectar si cambia */}
       {!confirmed ? (
         <button
-          data-test-id="checkout-btn"
+          data-test-id="checkout-button"
           onClick={handlePay}
           disabled={loading}
         >
