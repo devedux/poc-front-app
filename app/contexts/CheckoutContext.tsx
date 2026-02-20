@@ -1,6 +1,8 @@
+'use client'
+
 import React, { createContext, useContext, useMemo, useState } from "react"
 
-type CheckoutState = 'idle' | 'loading' | 'confirmed' | 'canceled'
+type CheckoutState = 'idle' | 'loading' | 'confirmed' | 'cancel'
 
 interface CheckoutContextStore {
     state: CheckoutState;
