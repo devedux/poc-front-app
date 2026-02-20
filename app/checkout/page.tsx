@@ -1,9 +1,12 @@
 import Checkout from '../components/Checkout'
+import { CheckoutProvider } from '../contexts/CheckoutContext'
 
 export default function CheckoutPage() {
   return (
     <main>
-      <Checkout isUserEligible={true} />
+      <CheckoutProvider>
+        <Checkout isUserEligible={true} />
+      </CheckoutProvider>
     </main>
   )
 }
