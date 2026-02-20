@@ -1,24 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import { useCheckoutContext } from '../contexts/CheckoutContext'
 
 interface CheckoutProps {
   isUserEligible?: boolean
 }
 
 export default function Checkout({ isUserEligible = true }: CheckoutProps) {
-  const [loading, setLoading] = useState(false)
-  const [confirmed, setConfirmed] = useState(false)
+  const { state, setState } = useCheckoutContext();
 
   const handlePay = async () => {
-    setLoading(true)
+    setState('loading');
     await new Promise((resolve) => setTimeout(resolve, 800))
-    setConfirmed(true)
-    setLoading(false)
+    setState('confirmed');
   }
 
   const handleCancel = () => {
-    setConfirmed(false)
+    setState('cancel')
   }
 
   return (
@@ -31,13 +30,13 @@ export default function Checkout({ isUserEligible = true }: CheckoutProps) {
       </div>
 
       {/* NIVEL FÁCIL: data-test-id y texto directo — fácil de detectar si cambia */}
-      {!confirmed ? (
+      {state != 'confirmed' ? (
         <button
           data-test-id="checkout-btn"
           onClick={handlePay}
-          disabled={loading}
+          disabled={state === 'loading'}
         >
-          {loading ? 'Procesando...' : 'Pagar'}
+          {state === 'loading' ? 'Procesando...' : 'Pagar'}
         </button>
       ) : (
         <div data-test-id="confirmation-message">
